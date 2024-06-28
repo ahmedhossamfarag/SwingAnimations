@@ -2,6 +2,7 @@ package swing.animations;
 
 import javax.swing.*;
 import java.awt.*;
+import java.security.InvalidParameterException;
 
 public class ResizeAnimation extends Animation{
     private final JComponent component;
@@ -9,7 +10,11 @@ public class ResizeAnimation extends Animation{
     private final Dimension vector;
     private final int time;
 
-    public ResizeAnimation(JComponent component, Dimension from, Dimension to, int time) {
+    public ResizeAnimation(JComponent component, Dimension from, Dimension to, int time) throws InvalidParameterException {
+        if(component == null) throw  new InvalidParameterException("from can't be null");
+        if(from == null) throw  new InvalidParameterException("to can't be null");
+        if(to == null) throw  new InvalidParameterException("component can't be null");
+        if(time == 0) throw  new InvalidParameterException("time can't be 0");
         this.component = component;
         this.from = from;
         this.vector = new Dimension(to.width - from.width, to.height - from.height);

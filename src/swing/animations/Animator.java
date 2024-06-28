@@ -1,5 +1,6 @@
 package swing.animations;
 
+import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -29,9 +30,13 @@ public class Animator {
         }
     }
 
-    protected void goToState(State nextState) {
-        currentState = nextState;
-        currentFrame = 0;
+    protected void makeTransition(Transition transition) {
+        if(currentState != null && transition != null){
+            if(currentState.hasTransition(transition)){
+                currentState = transition.getNextState();
+                currentFrame = 0;
+            }
+        }
     }
 
     private void update(){

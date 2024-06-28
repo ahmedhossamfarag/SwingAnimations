@@ -47,6 +47,10 @@ public class State {
         }
     }
 
+    protected boolean hasTransition(Transition transition){
+        return this.transitions.contains(transition);
+    }
+
     public void remove() {
         transitions.forEach(Transition::remove);
     }

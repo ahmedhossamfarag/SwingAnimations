@@ -17,6 +17,10 @@ public class Transition implements ChangeListener{
         variable.addListener(this);
     }
 
+    protected State getNextState() {
+        return nextState;
+    }
+
     protected boolean isListenerTo(ObservableVariable variable, Object changeValue){
         if(!Objects.equals(this.variable, variable)) return false;
         return Objects.equals(this.changeValue, changeValue);
@@ -25,7 +29,7 @@ public class Transition implements ChangeListener{
     @Override
     public void onChange(Object oldValue, Object newValue) {
         if(Objects.equals(newValue, changeValue))
-            animator.goToState(nextState);
+            animator.makeTransition(this);
     }
 
     protected void remove() {
